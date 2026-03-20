@@ -1,8 +1,9 @@
 import { Brain } from "lucide-react";
 
 const FooterSection = () => (
-  <footer className="border-t border-border/50 py-12 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+  <footer className="border-t border-border/30 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-t from-primary/[0.03] to-transparent" />
+    <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 relative">
       <div className="flex items-center gap-2">
         <Brain className="w-5 h-5 text-primary" />
         <span className="font-display font-semibold">DecideMate</span>
