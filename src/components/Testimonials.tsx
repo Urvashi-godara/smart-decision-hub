@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
+import bgAurora from "@/assets/bg-aurora-waves.jpg";
+import SectionBackground from "./SectionBackground";
 
 const testimonials = [
   {
@@ -23,45 +25,47 @@ const testimonials = [
 ];
 
 const Testimonials = () => (
-  <section className="section-padding relative">
-    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent" />
-    <div className="max-w-5xl mx-auto relative">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-16"
-      >
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display mb-4">
-          What People <span className="glow-text">Say</span>
-        </h2>
-      </motion.div>
+  <SectionBackground image={bgAurora} opacity={0.1} overlay="darker">
+    <section className="section-padding relative">
+      <div className="max-w-5xl mx-auto relative">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display mb-4">
+            What People <span className="glow-text">Say</span>
+          </h2>
+        </motion.div>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {testimonials.map((t, i) => (
-          <motion.div
-            key={t.name}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="glass-card-hover p-6"
-          >
-            <div className="flex gap-0.5 mb-4">
-              {Array.from({ length: t.stars }).map((_, si) => (
-                <Star key={si} className="w-4 h-4 fill-primary text-primary" />
-              ))}
-            </div>
-            <p className="text-foreground/80 mb-4 leading-relaxed text-sm">"{t.text}"</p>
-            <div>
-              <p className="font-semibold text-sm">{t.name}</p>
-              <p className="text-xs text-muted-foreground">{t.role}</p>
-            </div>
-          </motion.div>
-        ))}
+        <div className="grid md:grid-cols-3 gap-6">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="glass-card-hover p-6 relative"
+            >
+              <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/10" />
+              <div className="flex gap-0.5 mb-4">
+                {Array.from({ length: t.stars }).map((_, si) => (
+                  <Star key={si} className="w-4 h-4 fill-primary text-primary" />
+                ))}
+              </div>
+              <p className="text-foreground/80 mb-4 leading-relaxed text-sm">"{t.text}"</p>
+              <div>
+                <p className="font-semibold text-sm">{t.name}</p>
+                <p className="text-xs text-muted-foreground">{t.role}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </SectionBackground>
 );
 
 export default Testimonials;

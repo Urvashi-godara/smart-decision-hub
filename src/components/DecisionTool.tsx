@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap, BarChart3, MessageSquare } from "lucide-react";
+import bgNetwork from "@/assets/bg-abstract-network.jpg";
+import SectionBackground from "./SectionBackground";
 
 const categories = ["Food", "Career", "Movies", "Daily Life", "Shopping", "Travel"];
 const budgets = ["Low", "Medium", "High"];
@@ -62,115 +64,117 @@ const DecisionTool = () => {
   };
 
   return (
-    <section id="decision-tool" className="section-padding relative">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display mb-4">
-            <span className="glow-text">Decision Tool</span>
-          </h2>
-          <p className="text-muted-foreground text-lg">Tell us what you're deciding and we'll do the thinking.</p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass-card p-6 sm:p-8 lg:p-10"
-        >
-          <div className="grid sm:grid-cols-2 gap-6 mb-8">
-            <SelectField label="Category" value={category} onChange={setCategory} options={categories} />
-            <SelectField label="Budget" value={budget} onChange={setBudget} options={budgets} />
-            <SelectField label="Mood" value={mood} onChange={setMood} options={moods} />
-            <SelectField label="Priority" value={priority} onChange={setPriority} options={priorities} />
-          </div>
-
-          <motion.button
-            onClick={generate}
-            disabled={!category || !budget || !mood || !priority}
-            className="w-full py-4 rounded-lg bg-primary text-primary-foreground font-semibold text-lg transition-all duration-300 hover:shadow-[0_0_30px_hsla(173,80%,50%,0.3)] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+    <SectionBackground image={bgNetwork} opacity={0.08} overlay="darker">
+      <section id="decision-tool" className="section-padding relative">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
           >
-            <Zap className="w-5 h-5" />
-            Generate Smart Decision
-          </motion.button>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display mb-4">
+              <span className="glow-text">Decision Tool</span>
+            </h2>
+            <p className="text-muted-foreground text-lg">Tell us what you're deciding and we'll do the thinking.</p>
+          </motion.div>
 
-          <AnimatePresence>
-            {result && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                animate={{ opacity: 1, height: "auto", marginTop: 32 }}
-                exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                className="overflow-hidden"
-              >
-                <div className="glass-card glow-border p-6 space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Zap className="w-5 h-5 text-primary mt-1 shrink-0" />
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-1">Recommendation</p>
-                      <p className="text-lg font-semibold">{result.rec}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <MessageSquare className="w-5 h-5 text-accent mt-1 shrink-0" />
-                    <div>
-                      <p className="text-sm text-muted-foreground mb-1">Why This Choice</p>
-                      <p className="text-foreground/80">{result.why}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <BarChart3 className="w-5 h-5 text-primary mt-1 shrink-0" />
-                    <div className="w-full">
-                      <p className="text-sm text-muted-foreground mb-2">Confidence Score</p>
-                      <div className="w-full h-3 rounded-full bg-muted overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${result.confidence}%` }}
-                          transition={{ duration: 1, ease: "easeOut" }}
-                          className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
-                        />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="glass-card p-6 sm:p-8 lg:p-10"
+          >
+            <div className="grid sm:grid-cols-2 gap-6 mb-8">
+              <SelectField label="Category" value={category} onChange={setCategory} options={categories} />
+              <SelectField label="Budget" value={budget} onChange={setBudget} options={budgets} />
+              <SelectField label="Mood" value={mood} onChange={setMood} options={moods} />
+              <SelectField label="Priority" value={priority} onChange={setPriority} options={priorities} />
+            </div>
+
+            <motion.button
+              onClick={generate}
+              disabled={!category || !budget || !mood || !priority}
+              className="w-full py-4 rounded-lg bg-primary text-primary-foreground font-semibold text-lg transition-all duration-300 hover:shadow-[0_0_30px_hsla(173,80%,50%,0.3)] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Zap className="w-5 h-5" />
+              Generate Smart Decision
+            </motion.button>
+
+            <AnimatePresence>
+              {result && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                  animate={{ opacity: 1, height: "auto", marginTop: 32 }}
+                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="glass-card glow-border p-6 space-y-4">
+                    <div className="flex items-start gap-3">
+                      <Zap className="w-5 h-5 text-primary mt-1 shrink-0" />
+                      <div>
+                        <p className="text-sm text-muted-foreground mb-1">Recommendation</p>
+                        <p className="text-lg font-semibold">{result.rec}</p>
                       </div>
-                      <p className="text-right text-sm text-primary font-semibold mt-1">{result.confidence}%</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <MessageSquare className="w-5 h-5 text-accent mt-1 shrink-0" />
+                      <div>
+                        <p className="text-sm text-muted-foreground mb-1">Why This Choice</p>
+                        <p className="text-foreground/80">{result.why}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <BarChart3 className="w-5 h-5 text-primary mt-1 shrink-0" />
+                      <div className="w-full">
+                        <p className="text-sm text-muted-foreground mb-2">Confidence Score</p>
+                        <div className="w-full h-3 rounded-full bg-muted overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${result.confidence}%` }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                            className="h-full rounded-full bg-gradient-to-r from-primary to-accent"
+                          />
+                        </div>
+                        <p className="text-right text-sm text-primary font-semibold mt-1">{result.confidence}%</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
-        {/* Use Cases */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
-          <p className="text-muted-foreground mb-4">Quick picks — try one:</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { label: "🍕 What should I eat?", cat: "Food" },
-              { label: "🎬 What should I watch?", cat: "Movies" },
-              { label: "🎯 What should I do this weekend?", cat: "Daily Life" },
-              { label: "📚 Which course should I choose?", cat: "Career" },
-            ].map((uc) => (
-              <button
-                key={uc.cat}
-                onClick={() => prefill(uc.cat)}
-                className="px-5 py-2.5 rounded-full glass-card-hover text-sm font-medium cursor-pointer border border-border/50 hover:border-primary/40 transition-colors"
-              >
-                {uc.label}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
+          {/* Use Cases */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <p className="text-muted-foreground mb-4">Quick picks — try one:</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {[
+                { label: "🍕 What should I eat?", cat: "Food" },
+                { label: "🎬 What should I watch?", cat: "Movies" },
+                { label: "🎯 What should I do this weekend?", cat: "Daily Life" },
+                { label: "📚 Which course should I choose?", cat: "Career" },
+              ].map((uc) => (
+                <button
+                  key={uc.cat}
+                  onClick={() => prefill(uc.cat)}
+                  className="px-5 py-2.5 rounded-full glass-card-hover text-sm font-medium cursor-pointer border border-border/50 hover:border-primary/40 transition-colors"
+                >
+                  {uc.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </SectionBackground>
   );
 };
 

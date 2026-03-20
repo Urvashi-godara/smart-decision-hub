@@ -67,8 +67,8 @@
 
 @layer components {
   .glass-card {
-    @apply bg-card/40 backdrop-blur-xl border border-border/50 rounded-xl;
-    box-shadow: 0 8px 32px hsla(var(--glow), 0.06), inset 0 1px 0 hsla(var(--foreground), 0.05);
+    @apply bg-card/50 backdrop-blur-2xl border border-border/40 rounded-xl;
+    box-shadow: 0 8px 32px hsla(var(--glow), 0.08), inset 0 1px 0 hsla(var(--foreground), 0.06);
   }
 
   .glass-card-hover {
